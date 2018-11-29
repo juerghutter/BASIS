@@ -1,0 +1,73 @@
+&GLOBAL
+  PROGRAM_NAME ATOM
+&END GLOBAL
+&ATOM
+  ELEMENT Pt
+
+  #RUN_TYPE BASIS_OPTIMIZATION
+
+#  ELECTRON_CONFIGURATION  [Kr] 4d10 4f14 5s2 5p6 5d9 6s1
+  ELECTRON_CONFIGURATION  CORE 5s2 5p6 5d8 6s2 
+  CORE [Kr] 4d10 4f14
+  MAX_ANGULAR_MOMENTUM 2
+
+  &METHOD
+     METHOD_TYPE  KOHN-SHAM
+     &XC
+       &XC_FUNCTIONAL PBE
+       &END XC_FUNCTIONAL
+     &END XC
+  &END METHOD
+
+  &OPTIMIZATION
+    EPS_SCF 1.e-6
+  &END 
+  &PRINT
+     &RESPONSE_BASIS
+        DERIVATIVES   1
+        FILENAME  =MINBAS
+     &END
+  &END
+
+  &PP_BASIS
+  BASIS_TYPE GAUSSIAN
+  NUM_GTO    4 4 3
+  S_EXPONENTS           2.68056259 \
+                        2.40003005 \
+                        0.72613960 \
+                        0.10942924
+  P_EXPONENTS           2.68056259 \
+                        2.40003005 \
+                        0.72613960 \
+                        0.10942924
+  D_EXPONENTS           1.18548769 \
+                        0.41051920 \
+                        0.13715222
+  &END PP_BASIS
+
+  &POTENTIAL
+    PSEUDO_TYPE GTH
+    &GTH_POTENTIAL
+    3    6    9    0
+    0.50023834323855       2    8.80761682949933   -0.29224695728328
+       3
+    0.29800450113165       3   -5.96986332819754   24.21289965999992  -13.78967804212236
+                                                  -53.68763413000000   35.60479890000057
+                                                                      -28.26151565156513
+    0.36058361183697       3   -6.67487820215815    7.17066020916068    0.76690369999558
+                                                   -7.20698813982077   -1.81482537999368
+                                                                        1.29035948697583
+    0.34053295964396       2   -8.58990455000000    9.41012199999454
+                                                  -10.68007537015553
+    &END 
+    CONFINEMENT_TYPE  BARRIER
+    CONFINEMENT 200. 4.0 12.0
+  &END POTENTIAL
+
+  &POWELL
+     ACCURACY   1.e-14
+     STEP_SIZE  0.1
+     MAX_FUN    5000
+  &END
+
+&END ATOM

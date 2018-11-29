@@ -1,0 +1,58 @@
+&GLOBAL
+  PROGRAM_NAME ATOM
+&END GLOBAL
+&ATOM
+  ELEMENT Ne
+
+  RUN_TYPE BASIS_OPTIMIZATION
+
+  ELECTRON_CONFIGURATION  CORE 2s2 2p6
+  CORE [He]
+  MAX_ANGULAR_MOMENTUM 1
+
+  &METHOD
+     METHOD_TYPE  KOHN-SHAM
+     &XC
+       &XC_FUNCTIONAL PBE
+       &END XC_FUNCTIONAL
+     &END XC
+  &END METHOD
+  &OPTIMIZATION
+    EPS_SCF 1.e-7
+  &END 
+
+  &PP_BASIS
+  BASIS_TYPE GAUSSIAN
+  NUM_GTO    5 5
+  S_EXPONENTS          16.90183015 \
+                        6.06523444 \
+                        2.15635388 \
+                        0.73360172 \
+                        0.22559507
+  P_EXPONENTS          16.90183015 \
+                        6.06523444 \
+                        2.15635388 \
+                        0.73360172 \
+                        0.22559507
+  &END PP_BASIS
+
+  &POTENTIAL
+    PSEUDO_TYPE GTH
+    &GTH_POTENTIAL
+    2    6    0    0
+    0.19013599957922       2  -27.11394809602904    4.36380616652624
+       2
+    0.17606810618356       2   28.17757050106910    0.83365740579601
+                                                   -1.07616503335814
+    0.19546571702831       1   -0.23610573844687
+    &END 
+    CONFINEMENT_TYPE  BARRIER
+    CONFINEMENT 200. 4.0 12.0 
+  &END POTENTIAL
+
+  &POWELL
+     ACCURACY   1.e-14
+     STEP_SIZE  0.5
+     MAX_FUN    1000
+  &END
+&END ATOM
