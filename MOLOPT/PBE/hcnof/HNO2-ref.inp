@@ -1,0 +1,62 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    BASIS_SET_FILE_NAME /data/hutter/GITHUB/BASIS/UZH2018/PBE/PBE_UCBASIS
+    POTENTIAL_FILE_NAME /data/hutter/GITHUB/GTH/PBE/POTENTIAL
+    &MGRID
+      CUTOFF 500
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      EPS_DEFAULT 1.0E-12
+      MAP_CONSISTENT
+      EXTRAPOLATION PS
+      EXTRAPOLATION_ORDER 3
+    &END QS
+    &SCF
+      EPS_SCF 1.0E-7
+      SCF_GUESS ATOMIC
+      MAX_SCF 10
+      &OT
+         MINIMIZER DIIS
+         PRECONDITIONER FULL_ALL
+      &END OT
+      &OUTER_SCF
+         EPS_SCF 1.0E-7
+         MAX_SCF 10
+      &END
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 12.0 12.0 12.0
+    &END CELL
+    &COORD
+  H        -0.000100        0.000000       -0.917488
+  N         0.000322        0.000000        0.134183
+  O        -0.000160        1.106822        0.667301
+  O        -0.000160       -1.106822        0.667301
+    &END COORD
+    &KIND H
+      BASIS_SET uc-bas-q1
+      POTENTIAL GTH-PBE-q1
+    &END KIND
+    &KIND N
+      BASIS_SET uc-bas-q5
+      POTENTIAL GTH-PBE-q5
+    &END KIND
+    &KIND O
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-PBE-q6
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refHNO2
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+&END GLOBAL
