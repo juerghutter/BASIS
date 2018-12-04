@@ -1,0 +1,75 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    BASIS_SET_FILE_NAME ../PBE_UCBASIS
+    POTENTIAL_FILE_NAME ../POTENTIAL
+    &MGRID
+      CUTOFF 600
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      EPS_DEFAULT 1.0E-12
+    &END QS
+    &SCF
+      EPS_SCF 1.0E-7
+      MAX_SCF 10
+      SCF_GUESS ATOMIC
+      &OT
+         MINIMIZER DIIS
+         PRECONDITIONER FULL_ALL
+      &END OT
+      &OUTER_SCF
+        EPS_SCF 1.0E-7
+        MAX_SCF 10
+      &END 
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 12.0 12.0 12.0
+    &END CELL
+    &COORD
+B       7.88533397       7.99999987       8.85229361        5
+N       7.88538196       7.99999988       7.20296392        7
+H       7.29163253       9.02843372       9.17649077        1
+H       6.92719895       7.99999987       6.82355658        1
+H       7.29162267       6.97156628       9.17651208        1
+H       8.36446445       7.17014726       6.82348793        1
+H       9.07280105       7.99999989       9.17644574        1
+H       8.36446444       8.82985249       6.82348792        1
+    &END COORD
+    &KIND H
+      BASIS_SET uc-bas-q1
+      POTENTIAL GTH-PBE-q1
+    &END KIND
+    &KIND B
+      BASIS_SET uc-bas-q3
+      POTENTIAL GTH-PBE-q3
+    &END KIND
+    &KIND C
+      BASIS_SET uc-bas-q4
+      POTENTIAL GTH-PBE-q4
+    &END KIND
+    &KIND N
+      BASIS_SET uc-bas-q5
+      POTENTIAL GTH-PBE-q5
+    &END KIND
+    &KIND O
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-PBE-q6
+    &END KIND
+    &KIND F
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-PBE-q7
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refBH3NH3
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+&END GLOBAL
