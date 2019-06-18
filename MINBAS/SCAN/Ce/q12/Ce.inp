@@ -1,0 +1,83 @@
+&GLOBAL
+  PROGRAM_NAME ATOM
+&END GLOBAL
+&ATOM
+  ELEMENT Ce
+
+  #RUN_TYPE BASIS_OPTIMIZATION
+
+  ELECTRON_CONFIGURATION  CORE 4f1 5s2 5p6 5d1 6s2
+#  ELECTRON_CONFIGURATION  [Kr] 4d10 4f1 5s2 5p6 5d0.5 6s2 6p0.5
+#  ELECTRON_CONFIGURATION  [Kr] 4d10 4f1 5s2 5p6 5d1.5 6s1.5
+  CORE [Kr] 4d10
+  MAX_ANGULAR_MOMENTUM 3
+
+  &METHOD
+     METHOD_TYPE  KOHN-SHAM
+     &XC
+       &XC_FUNCTIONAL
+         &LIBXC
+          FUNCTIONAL MGGA_X_SCAN
+         &END LIBXC
+         &LIBXC
+           FUNCTIONAL MGGA_C_SCAN
+         &END LIBXC
+       &END XC_FUNCTIONAL
+     &END XC
+  &END METHOD
+
+  &OPTIMIZATION
+    EPS_SCF 1.e-7
+  &END 
+  &PRINT
+     &RESPONSE_BASIS
+        DERIVATIVES   1
+        FILENAME  =MINBAS
+     &END
+  &END
+
+  &PP_BASIS
+  BASIS_TYPE GAUSSIAN
+  NUM_GTO    4 4 4 4
+  S_EXPONENTS           1.17482005 \
+                        1.05778861 \
+                        0.30151146 \
+                        0.04741808
+  P_EXPONENTS           1.17482005 \
+                        1.05778861 \
+                        0.30151146 \
+                        0.04741808
+  D_EXPONENTS           3.91255724 \
+                        1.45461629 \
+                        0.46278862 \
+                        0.11935350
+  F_EXPONENTS           3.91255724 \
+                        1.45461629 \
+                        0.46278862 \
+                        0.11935350
+  &END PP_BASIS
+
+  &POTENTIAL
+    PSEUDO_TYPE GTH
+    &GTH_POTENTIAL
+    4    6    0    2
+    0.53179382214295       2   18.79927568339344   -0.89622071758303
+       4
+    0.51213531206507       2    1.39641907669620    0.63822087272941
+                                                   -1.53776422965558
+    0.42683037132715       2    0.84700592657664    0.82459567136210
+                                                   -1.53352825118109
+    0.62318383895792       1    0.16259057979339
+    0.30592648056307       1  -17.22992817782713
+    &END 
+    CONFINEMENT_TYPE  BARRIER
+    CONFINEMENT 200. 4.0 12.0
+  &END POTENTIAL
+
+  &POWELL
+     ACCURACY   1.e-14
+     STEP_SIZE  0.1
+     MAX_FUN    5000
+  &END
+
+&END ATOM
