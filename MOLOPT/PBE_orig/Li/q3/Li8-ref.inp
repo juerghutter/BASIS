@@ -1,0 +1,89 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    BASIS_SET_FILE_NAME ../../PBE_UCBASIS
+    POTENTIAL_FILE_NAME ../../POTENTIAL
+    &MGRID
+      CUTOFF 600
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      EPS_DEFAULT 1.0E-18
+    &END QS
+    &SCF
+      EPS_SCF 1.0E-7
+      MAX_SCF 10
+      SCF_GUESS ATOMIC
+      &OT
+         MINIMIZER DIIS
+         PRECONDITIONER FULL_ALL
+      &END OT
+      &OUTER_SCF
+        EPS_SCF 1.0E-7
+        MAX_SCF 10
+      &END 
+#      CHOLESKY OFF
+#      &MIXING
+#        METHOD BROYDEN_MIXING
+#      &END
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 12.0 12.0 12.0
+    &END CELL
+    &COORD
+Li       9.95063692       9.95064813       9.95055871        3
+Li       7.04935299       9.95068652       9.95059053        3
+Li       7.04930319       7.04931348       9.95063889        3
+Li       9.95069681       7.04933259       9.95061640        3
+Li       9.95058127       7.04944213       7.04936111        3
+Li       9.95054259       9.95055439       7.04940098        3
+Li       7.04945370       9.95057160       7.04938280        3
+Li       7.04941306       7.04946340       7.04937518        3
+    &END COORD
+################################
+    &KIND Li
+      BASIS_SET uc-bas-q3
+      POTENTIAL GTH-PBE-q3
+    &END KIND
+################################
+    &KIND S
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-PBE-q6
+    &END KIND
+    &KIND Cl
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-PBE-q7
+    &END KIND
+    &KIND H
+      BASIS_SET uc-bas-q1
+      POTENTIAL GTH-PBE-q1
+    &END KIND
+    &KIND B
+      BASIS_SET uc-bas-q3
+      POTENTIAL GTH-PBE-q3
+    &END KIND
+    &KIND C
+      BASIS_SET uc-bas-q4
+      POTENTIAL GTH-PBE-q4
+    &END KIND
+    &KIND O
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-PBE-q6
+    &END KIND
+    &KIND F
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-PBE-q7
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refLi8q3
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+&END GLOBAL
