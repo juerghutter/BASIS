@@ -1,11 +1,11 @@
 &FORCE_EVAL
   METHOD Quickstep
   &DFT
-    BASIS_SET_FILE_NAME ../PBE_UCBASIS
+    BASIS_SET_FILE_NAME ../SCAN_UCBASIS
     POTENTIAL_FILE_NAME ../POTENTIAL
     &MGRID
-      CUTOFF 600
-      REL_CUTOFF  60
+      CUTOFF 2100
+      REL_CUTOFF  80
     &END MGRID
     &QS
       EPS_DEFAULT 1.0E-14
@@ -20,12 +20,18 @@
       &END OT
       &OUTER_SCF
         EPS_SCF 1.0E-7
-        MAX_SCF 10
+        MAX_SCF 5
       &END 
     &END SCF
     &XC
-      &XC_FUNCTIONAL PBE
-      &END XC_FUNCTIONAL
+       &XC_FUNCTIONAL
+         &LIBXC
+          FUNCTIONAL MGGA_X_SCAN
+         &END LIBXC
+         &LIBXC
+           FUNCTIONAL MGGA_C_SCAN
+         &END LIBXC
+       &END XC_FUNCTIONAL
     &END XC
   &END DFT
   &SUBSYS
@@ -41,36 +47,36 @@ Na      11.04468959       9.50000000       9.15128346
 ################################
     &KIND Na
       BASIS_SET uc-bas-q9
-      POTENTIAL GTH-PBE-q9
+      POTENTIAL GTH-SCAN-q9
     &END KIND
 ################################
     &KIND H
       BASIS_SET uc-bas-q1
-      POTENTIAL GTH-PBE-q1
+      POTENTIAL GTH-SCAN-q1
     &END KIND
     &KIND N
       BASIS_SET uc-bas-q5
-      POTENTIAL GTH-PBE-q5
+      POTENTIAL GTH-SCAN-q5
     &END KIND
     &KIND O
       BASIS_SET uc-bas-q6
-      POTENTIAL GTH-PBE-q6
+      POTENTIAL GTH-SCAN-q6
     &END KIND
     &KIND F
       BASIS_SET uc-bas-q7
-      POTENTIAL GTH-PBE-q7
+      POTENTIAL GTH-SCAN-q7
     &END KIND
     &KIND P
       BASIS_SET uc-bas-q5
-      POTENTIAL GTH-PBE-q5
+      POTENTIAL GTH-SCAN-q5
     &END KIND
     &KIND S
       BASIS_SET uc-bas-q6
-      POTENTIAL GTH-PBE-q6
+      POTENTIAL GTH-SCAN-q6
     &END KIND
     &KIND Cl
       BASIS_SET uc-bas-q7
-      POTENTIAL GTH-PBE-q7
+      POTENTIAL GTH-SCAN-q7
     &END KIND
   &END SUBSYS
 &END FORCE_EVAL
