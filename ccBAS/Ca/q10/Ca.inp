@@ -13,7 +13,7 @@
   &METHOD
      METHOD_TYPE  KOHN-SHAM
      &XC
-       &XC_FUNCTIONAL PBE
+       &XC_FUNCTIONAL PBE0
        &END XC_FUNCTIONAL
      &END XC
   &END METHOD
@@ -21,46 +21,31 @@
     EPS_SCF 1.e-7
   &END 
   &PRINT
-     &RESPONSE_BASIS
-        DERIVATIVES   1
-        FILENAME  =MINBAS
+     &GEOMETRICAL_RESPONSE_BASIS
+       FILENAME          =VALBAS
+       DERIVATIVES             3
+       NAME_BODY           ccGRB
+       NUM_GTO_CORE            6
+       NUM_GTO_POLARIZATION    3
+       NUM_GTO_EXTENDED        1
+       CONFINEMENT          8.00
      &END
   &END
-
-  &PP_BASIS
-  BASIS_TYPE GAUSSIAN
-  NUM_GTO    6 3
-  S_EXPONENTS           7.71400700 \
-                        3.86597117 \
-                        0.87835936 \
-                        0.36525029 \
-                        0.10513610 \
-                        0.04381214
-  P_EXPONENTS           6.75030146 \
-                        1.15951660 \
-                        0.37541275
-  &END PP_BASIS
 
   &POTENTIAL
     PSEUDO_TYPE GTH
     &GTH_POTENTIAL
     4    6    0    0
-    0.36524646201469       2   -4.18040066698547   -1.68878492024640
+    0.37175661812378       2   -4.98130693989215   -1.45568254386533
        3
-    0.28988798370645       2   20.50114819545028   -7.12978488930349
-                                                    9.14328142165610
-    0.32689189928945       2    5.80289305812489   -0.42875330696042
-                                                    0.48639233785097
-    0.67993690959315       1    0.05846459767069
+    0.28967510971394       2   20.42911028907305   -7.12978450365126
+                                                    9.20655562151994
+    0.32764812097716       2    5.79230576821080   -0.42875557755192
+                                                    0.49052102658077
+    0.79109627104486       1    0.05752085539933
     &END 
     CONFINEMENT_TYPE  BARRIER
     CONFINEMENT 200. 4.0 12.0 
   &END POTENTIAL
-
-  &POWELL
-     ACCURACY   1.e-14
-     STEP_SIZE  0.1
-     MAX_FUN    1000
-  &END
 
 &END ATOM

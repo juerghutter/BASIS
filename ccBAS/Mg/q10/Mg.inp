@@ -4,7 +4,7 @@
 &ATOM
   ELEMENT Mg
 
-  #RUN_TYPE BASIS_OPTIMIZATION
+  RUN_TYPE ENERGY
 
   ELECTRON_CONFIGURATION  CORE 2s2 2p6 3s2
   CORE [He]
@@ -13,7 +13,7 @@
   &METHOD
      METHOD_TYPE  KOHN-SHAM
      &XC
-       &XC_FUNCTIONAL PBE
+       &XC_FUNCTIONAL PBE0
        &END XC_FUNCTIONAL
      &END XC
   &END METHOD
@@ -21,42 +21,27 @@
     EPS_SCF 1.e-7
   &END 
   &PRINT
-     &RESPONSE_BASIS
-        DERIVATIVES   1
-        FILENAME  =MINBAS
+     &GEOMETRICAL_RESPONSE_BASIS
+       FILENAME          =VALBAS
+       DERIVATIVES             3
+       NAME_BODY           ccGRB
+       NUM_GTO_CORE            6
+       NUM_GTO_POLARIZATION    3
+       NUM_GTO_EXTENDED        1
+       CONFINEMENT          8.00
      &END
   &END
-
-  &PP_BASIS
-  BASIS_TYPE GAUSSIAN
-  NUM_GTO    6 3
-  S_EXPONENTS          19.58002045 \
-                        2.54851709 \
-                        1.00281902 \
-                        0.39322208 \
-                        0.12552269 \
-                        0.04576050
-  P_EXPONENTS          16.61217777 \
-                        4.13636980 \
-                        1.04081591
-  &END PP_BASIS
 
   &POTENTIAL
     PSEUDO_TYPE GTH
     &GTH_POTENTIAL
     4    6    0    0
-    0.19268680878649       2  -20.56735568413243    3.01468273390367
+    0.19151880340941       3  -20.58996450243945    3.05422653377244    0.01037248076816
        2
-    0.14143376289344       1   41.04421929517378
-    0.10299829256128       1   -9.98068177850598
+    0.14118088879317       1   41.04649235094767
+    0.10344445822122       1  -10.14994233229308
     &END 
     CONFINEMENT_TYPE  BARRIER
     CONFINEMENT 200. 4.0 12.0 
   &END POTENTIAL
-
-  &POWELL
-     ACCURACY   1.e-14
-     STEP_SIZE  0.1
-     MAX_FUN    5000
-  &END
 &END ATOM

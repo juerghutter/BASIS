@@ -4,7 +4,7 @@
 &ATOM
   ELEMENT Pt
 
-  #RUN_TYPE BASIS_OPTIMIZATION
+  RUN_TYPE ENERGY
 
 #  ELECTRON_CONFIGURATION  [Kr] 4d10 4f14 5s2 5p6 5d9 6s1
   ELECTRON_CONFIGURATION  CORE 5s2 5p6 5d8 6s2 
@@ -14,7 +14,7 @@
   &METHOD
      METHOD_TYPE  KOHN-SHAM
      &XC
-       &XC_FUNCTIONAL PBE
+       &XC_FUNCTIONAL PBE0
        &END XC_FUNCTIONAL
      &END XC
   &END METHOD
@@ -23,51 +23,34 @@
     EPS_SCF 1.e-6
   &END 
   &PRINT
-     &RESPONSE_BASIS
-        DERIVATIVES   1
-        FILENAME  =MINBAS
+     &GEOMETRICAL_RESPONSE_BASIS
+       FILENAME          =VALBAS
+       DERIVATIVES             3
+       NAME_BODY           ccGRB
+       NUM_GTO_CORE            6
+       NUM_GTO_POLARIZATION    3
+       NUM_GTO_EXTENDED        1
+       CONFINEMENT          8.00
      &END
   &END
-
-  &PP_BASIS
-  BASIS_TYPE GAUSSIAN
-  NUM_GTO    4 4 3
-  S_EXPONENTS           2.68056259 \
-                        2.40003005 \
-                        0.72613960 \
-                        0.10942924
-  P_EXPONENTS           2.68056259 \
-                        2.40003005 \
-                        0.72613960 \
-                        0.10942924
-  D_EXPONENTS           1.18548769 \
-                        0.41051920 \
-                        0.13715222
-  &END PP_BASIS
 
   &POTENTIAL
     PSEUDO_TYPE GTH
     &GTH_POTENTIAL
     3    6    9    0
-    0.50023834323855       2    8.80761682949933   -0.29224695728328
+    0.50039858662197       2    8.67957287434169   -0.29113947694976
        3
-    0.29800450113165       3   -5.96986332819754   24.21289965999992  -13.78967804212236
-                                                  -53.68763413000000   35.60479890000057
-                                                                      -28.26151565156513
-    0.36058361183697       3   -6.67487820215815    7.17066020916068    0.76690369999558
-                                                   -7.20698813982077   -1.81482537999368
-                                                                        1.29035948697583
-    0.34053295964396       2   -8.58990455000000    9.41012199999454
-                                                  -10.68007537015553
+    0.29809308506356       3   -6.01454900051217   24.21291522235697  -13.78969416099537
+                                                  -53.68675683058370   35.60480776723914
+                                                                      -28.25959319868022
+    0.36040046930173       3   -6.69371000083147    7.17066277379569    0.76690082591818
+                                                   -7.20819445027887   -1.81482215859742
+                                                                        1.28963482154866
+    0.34052882103722       2   -8.68989240025152    9.41012046498719
+                                                  -10.66902256582315
     &END 
     CONFINEMENT_TYPE  BARRIER
     CONFINEMENT 200. 4.0 12.0
   &END POTENTIAL
-
-  &POWELL
-     ACCURACY   1.e-14
-     STEP_SIZE  0.1
-     MAX_FUN    5000
-  &END
 
 &END ATOM
