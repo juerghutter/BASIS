@@ -8,10 +8,10 @@
       REL_CUTOFF  60
     &END MGRID
     &QS
-      EPS_DEFAULT 1.0E-16
+      EPS_DEFAULT 1.0E-14
     &END QS
     &SCF
-      EPS_SCF 1.0E-6
+      EPS_SCF 1.0E-7
       MAX_SCF 10
       SCF_GUESS ATOMIC
       &OT
@@ -19,15 +19,14 @@
          PRECONDITIONER FULL_ALL
       &END OT
       &OUTER_SCF
-        EPS_SCF 1.0E-6
+        EPS_SCF 1.0E-7
         MAX_SCF 10
       &END 
     &END SCF
-    @XCTYPE PBE0
-#    &XC
-#      &XC_FUNCTIONAL PBE0
-#      &END XC_FUNCTIONAL
-#    &END XC
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
     &POISSON
         PERIODIC NONE
         POISSON_SOLVER MT
@@ -35,12 +34,13 @@
   &END DFT
   &SUBSYS
     &CELL
-      ABC 16.0 16.0 16.0
+      ABC 12.0 12.0 12.0
       PERIODIC NONE
     &END CELL
     &COORD
-N       8.00000000       8.00000000       8.90057073        7
-Al       8.00000000       8.00000000       7.09942927       13
+S       8.00000000       8.00000000       8.52494254       16
+F       9.25881104       8.00000000       7.47505746        9
+F       6.74118896       8.00000000       7.47505746        9
     &END COORD
     &KIND Al
       BASIS_SET uc-bas-q3
@@ -90,7 +90,7 @@ Al       8.00000000       8.00000000       7.09942927       13
   &END SUBSYS
 &END FORCE_EVAL
 &GLOBAL
-  PROJECT refAlN
+  PROJECT refSF2
   RUN_TYPE ENERGY
   PRINT_LEVEL LOW
 &END GLOBAL
