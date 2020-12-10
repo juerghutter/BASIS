@@ -1,7 +1,7 @@
 &FORCE_EVAL
   METHOD Quickstep
   &DFT
-    BASIS_SET_FILE_NAME ../PBE_UCBASIS
+    BASIS_SET_FILE_NAME ../PBE0_UCSEGBASIS
     POTENTIAL_FILE_NAME ../POTENTIAL
     &MGRID
       CUTOFF 600
@@ -23,14 +23,41 @@
         MAX_SCF 10
       &END 
     &END SCF
+#    &XC
+#      &XC_FUNCTIONAL PBE0
+#      &END XC_FUNCTIONAL
+#    &END XC
     &XC
-      &XC_FUNCTIONAL PBE
+      &XC_FUNCTIONAL
+        &PBE
+          SCALE_X 0.75
+          SCALE_C 1.0
+        &END
       &END XC_FUNCTIONAL
+      &HF
+        &SCREENING
+          EPS_SCHWARZ 1.0E-12
+          SCREEN_ON_INITIAL_P F
+        &END
+        &MEMORY
+          MAX_MEMORY 6000
+          EPS_STORAGE_SCALING 0.1
+        &END
+        &INTERACTION_POTENTIAL
+          POTENTIAL_TYPE COULOMB
+        &END
+        FRACTION 0.25
+      &END
     &END XC
+    &POISSON
+        PERIODIC NONE
+        POISSON_SOLVER MT
+    &END
   &END DFT
   &SUBSYS
     &CELL
       ABC 12.0 12.0 12.0
+      PERIODIC NONE
     &END CELL
     &COORD
 P       9.92430477       9.66564752      10.15740199      
@@ -41,36 +68,36 @@ Na       7.68077069      10.01658034       8.85258042
 ################################
     &KIND Na
       BASIS_SET uc-bas-q9
-      POTENTIAL GTH-PBE-q9
+      POTENTIAL GTH-PBE0-q9
     &END KIND
 ################################
     &KIND H
       BASIS_SET uc-bas-q1
-      POTENTIAL GTH-PBE-q1
+      POTENTIAL GTH-PBE0-q1
     &END KIND
     &KIND N
       BASIS_SET uc-bas-q5
-      POTENTIAL GTH-PBE-q5
+      POTENTIAL GTH-PBE0-q5
     &END KIND
     &KIND O
       BASIS_SET uc-bas-q6
-      POTENTIAL GTH-PBE-q6
+      POTENTIAL GTH-PBE0-q6
     &END KIND
     &KIND F
       BASIS_SET uc-bas-q7
-      POTENTIAL GTH-PBE-q7
+      POTENTIAL GTH-PBE0-q7
     &END KIND
     &KIND P
       BASIS_SET uc-bas-q5
-      POTENTIAL GTH-PBE-q5
+      POTENTIAL GTH-PBE0-q5
     &END KIND
     &KIND S
       BASIS_SET uc-bas-q6
-      POTENTIAL GTH-PBE-q6
+      POTENTIAL GTH-PBE0-q6
     &END KIND
     &KIND Cl
       BASIS_SET uc-bas-q7
-      POTENTIAL GTH-PBE-q7
+      POTENTIAL GTH-PBE0-q7
     &END KIND
   &END SUBSYS
 &END FORCE_EVAL
