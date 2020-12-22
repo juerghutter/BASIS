@@ -1,0 +1,78 @@
+&GLOBAL
+  PROGRAM_NAME ATOM
+&END GLOBAL
+&ATOM
+  ELEMENT Eu
+
+  #RUN_TYPE BASIS_OPTIMIZATION
+
+#  ELECTRON_CONFIGURATION  [Kr] 4d10 4f7 5s2 5p6 5d0 6s2
+#  ELECTRON_CONFIGURATION  [Kr] 4d10 4f7 5s2 5p6 5d0 6s1.5 6p0.5
+  ELECTRON_CONFIGURATION  CORE 4f7 5s2 5p6 5d0.5 6s1.5
+#  ELECTRON_CONFIGURATION  (4) [Kr] 4d10 4f7 5s2 5p6 5d0 6s2
+  CORE [Kr] 4d10
+  MAX_ANGULAR_MOMENTUM 3
+
+  &METHOD
+     METHOD_TYPE  KOHN-SHAM
+     &XC
+       &XC_FUNCTIONAL PBE0
+       &END XC_FUNCTIONAL
+     &END XC
+  &END METHOD
+
+  &OPTIMIZATION
+    EPS_SCF 1.e-7
+  &END 
+  &PRINT
+     &RESPONSE_BASIS
+        DERIVATIVES   1
+        FILENAME  =MINBAS
+     &END
+  &END
+
+  &PP_BASIS
+  BASIS_TYPE GAUSSIAN
+  NUM_GTO    4 4 4 4
+  S_EXPONENTS           1.69389237 \
+                        0.91708756 \
+                        0.30916289 \
+                        0.04566078
+  P_EXPONENTS           1.69389237 \
+                        0.91708756 \
+                        0.30916289 \
+                        0.04566078
+  D_EXPONENTS           4.91035810 \
+                        2.01867269 \
+                        0.66793998 \
+                        0.16081014
+  F_EXPONENTS           4.91035810 \
+                        2.01867269 \
+                        0.66793998 \
+                        0.16081014
+  &END PP_BASIS
+
+  &POTENTIAL
+    PSEUDO_TYPE GTH
+    &GTH_POTENTIAL
+    4    6    0    7
+    0.53268718126670       2   17.50211153628687   -0.84318971061728
+       4
+    0.47146282201853       2    1.34524136336253    1.12914153584368
+                                                   -2.90364447556059
+    0.46512008149310       2    0.51830897219858    0.90207846137691
+                                                   -2.13765353678028
+    0.48257240411484       1   -0.40741641287993
+    0.28120292052529       1  -20.94650944261345
+    &END 
+    CONFINEMENT_TYPE  BARRIER
+    CONFINEMENT 200. 4.0 12.0
+  &END POTENTIAL
+
+  &POWELL
+     ACCURACY   1.e-14
+     STEP_SIZE  0.1
+     MAX_FUN    5000
+  &END
+
+&END ATOM

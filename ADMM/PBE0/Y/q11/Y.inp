@@ -1,0 +1,68 @@
+&GLOBAL
+  PROGRAM_NAME ATOM
+&END GLOBAL
+&ATOM
+  ELEMENT Y  
+
+  #RUN_TYPE BASIS_OPTIMIZATION
+
+  ELECTRON_CONFIGURATION  CORE 4s2 4p6 5s2 4d1
+  CORE [Ar] 3d10
+  MAX_ANGULAR_MOMENTUM 2
+
+  &METHOD
+     METHOD_TYPE  KOHN-SHAM
+     &XC
+       &XC_FUNCTIONAL PBE0
+       &END XC_FUNCTIONAL
+     &END XC
+  &END METHOD
+  &OPTIMIZATION
+    EPS_SCF 1.e-7
+  &END 
+  &PRINT
+     &RESPONSE_BASIS
+        DERIVATIVES   1
+        FILENAME  =MINBAS
+     &END
+  &END
+
+  &PP_BASIS
+  BASIS_TYPE GAUSSIAN
+  NUM_GTO    4 4 3
+  S_EXPONENTS           1.90885124 \
+                        0.96921939 \
+                        0.33900010 \
+                        0.05289788
+  P_EXPONENTS           1.90885124 \
+                        0.96921939 \
+                        0.33900010 \
+                        0.05289788
+  D_EXPONENTS           0.87668476 \
+                        0.28460577 \
+                        0.08097247
+  &END PP_BASIS
+
+  &POTENTIAL
+    PSEUDO_TYPE GTH
+    &GTH_POTENTIAL
+    4    6    1    0
+    0.47521434531583       3   12.16526171299877   -2.10072251631538    0.00088137912569
+       3
+    0.24381920635707       2   23.00674637728340   -8.32539308005295
+                                                   10.41652729506664
+    0.29006805856142       2    5.87600299296574   -5.85235206242686
+                                                    6.80617118437000
+    0.41271285489855       2    1.17831916260959   -1.31883779604540
+                                                    1.48215544152220
+    &END 
+    CONFINEMENT_TYPE  BARRIER
+    CONFINEMENT 200. 4.0 12.0 
+  &END POTENTIAL
+
+  &POWELL
+     ACCURACY   1.e-14
+     STEP_SIZE  0.1
+     MAX_FUN    5000
+  &END
+&END ATOM
