@@ -1,0 +1,118 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    LSD
+    MULTIPLICITY 3
+    BASIS_SET_FILE_NAME ../PBE_UCBASIS
+    POTENTIAL_FILE_NAME ../POTENTIAL
+    &MGRID
+      CUTOFF 800
+      REL_CUTOFF  80
+    &END MGRID
+    &QS
+      EPS_DEFAULT 1.0E-14
+    &END QS
+    &SCF
+      EPS_SCF 1.0E-6
+      MAX_SCF 60
+      SCF_GUESS ATOMIC
+      &OT
+         MINIMIZER CG
+         LINESEARCH 3PNt
+         PRECONDITIONER FULL_ALL
+      &END OT
+      &OUTER_SCF
+        EPS_SCF 1.0E-6
+        MAX_SCF 10
+      &END 
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 15.0 15.0 15.0
+    &END CELL
+    &COORD
+Fe      8.27821487       8.50000000       8.50000000   
+C       9.50358347       8.50000000      10.14006367  
+C       8.65687459       9.66539479      10.14006367 
+C       7.28687086       9.22025359      10.14006367
+C       7.28687086       7.77974641      10.14006367    
+C       8.65687459       7.33460521      10.14006367   
+C       9.50358347       8.50000000       6.85993633  
+C       8.65687459       7.33460521       6.85993633 
+C       7.28687086       7.77974641       6.85993633     
+C       7.28687086       9.22025359       6.85993633    
+C       8.65687459       9.66539479       6.85993633   
+H      10.60077887       8.50000000      10.13261069  
+H       8.99592662      10.70888962      10.13261069 
+H       6.39922113       9.86516886      10.13261069       
+H       6.39922113       7.13483114      10.13261069      
+H       8.99592662       6.29111038      10.13261069     
+H      10.60077887       8.50000000       6.86738931    
+H       8.99592662       6.29111038       6.86738931   
+H       6.39922113       7.13483114       6.86738931  
+H       6.39922113       9.86516886       6.86738931 
+H       8.99592662      10.70888962       6.86738931
+    &END COORD
+    &KIND Fe
+      BASIS_SET uc-bas-q16
+      POTENTIAL GTH-PBE-q16
+      MAGNETIZATION 2
+    &END KIND
+################################
+    &KIND Al
+      BASIS_SET uc-bas-q3
+      POTENTIAL GTH-PBE-q3
+    &END KIND
+    &KIND Si
+      BASIS_SET uc-bas-q4
+      POTENTIAL GTH-PBE-q4
+    &END KIND
+    &KIND P 
+      BASIS_SET uc-bas-q5
+      POTENTIAL GTH-PBE-q5
+    &END KIND
+    &KIND S 
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-PBE-q6
+    &END KIND
+    &KIND Cl
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-PBE-q7
+    &END KIND
+################################
+    &KIND H
+      BASIS_SET uc-bas-q1
+      POTENTIAL GTH-PBE-q1
+    &END KIND
+    &KIND B
+      BASIS_SET uc-bas-q3
+      POTENTIAL GTH-PBE-q3
+    &END KIND
+    &KIND C
+      BASIS_SET uc-bas-q4
+      POTENTIAL GTH-PBE-q4
+    &END KIND
+    &KIND N
+      BASIS_SET uc-bas-q5
+      POTENTIAL GTH-PBE-q5
+    &END KIND
+    &KIND O
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-PBE-q6
+    &END KIND
+    &KIND F
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-PBE-q7
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refFerrocenq16
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+&END GLOBAL

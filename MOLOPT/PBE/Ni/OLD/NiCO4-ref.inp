@@ -1,0 +1,108 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    LSD
+    BASIS_SET_FILE_NAME ../PBE_UCBASIS
+    POTENTIAL_FILE_NAME ../POTENTIAL
+    &MGRID
+      CUTOFF 600
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      EPS_DEFAULT 1.0E-14
+    &END QS
+    &SCF
+      EPS_SCF 1.0E-6
+      MAX_SCF 500
+      SCF_GUESS ATOMIC
+      &MIXING
+          METHOD BROYDEN_MIXING
+          ALPHA   0.2
+          BETA  1.0
+          NBUFFER 8
+      &END
+      EPS_DIIS 1.0E-12
+      ADDED_MOS 100 100
+      &SMEAR
+         ELECTRONIC_TEMPERATURE [au_temp] 0.010
+         METHOD FERMI_DIRAC
+      &END
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 12.0 12.0 12.0
+    &END CELL
+    &COORD
+Ni       8.50000000       8.50000000       8.50000000       28
+C       9.54949800       7.45050200       9.54949800        6 
+C       7.45050200       9.54949800       9.54949800        6 
+C       7.45050200       7.45050200       7.45050200        6 
+C       9.54949800       9.54949800       7.45050200        6 
+O      10.21598228       6.78401772      10.21598228        8 
+O       6.78401772      10.21598228      10.21598228        8 
+O       6.78401772       6.78401772       6.78401772        8 
+O      10.21598228      10.21598228       6.78401772        8 
+    &END COORD
+    &KIND Ni
+      BASIS_SET uc-bas-q18
+      POTENTIAL GTH-PBE-q18
+      MAGNETIZATION 3
+    &END KIND
+################################
+    &KIND Al
+      BASIS_SET uc-bas-q3
+      POTENTIAL GTH-PBE-q3
+    &END KIND
+    &KIND Si
+      BASIS_SET uc-bas-q4
+      POTENTIAL GTH-PBE-q4
+    &END KIND
+    &KIND P 
+      BASIS_SET uc-bas-q5
+      POTENTIAL GTH-PBE-q5
+    &END KIND
+    &KIND S 
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-PBE-q6
+    &END KIND
+    &KIND Cl
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-PBE-q7
+    &END KIND
+################################
+    &KIND H
+      BASIS_SET uc-bas-q1
+      POTENTIAL GTH-PBE-q1
+    &END KIND
+    &KIND B
+      BASIS_SET uc-bas-q3
+      POTENTIAL GTH-PBE-q3
+    &END KIND
+    &KIND C
+      BASIS_SET uc-bas-q4
+      POTENTIAL GTH-PBE-q4
+    &END KIND
+    &KIND N
+      BASIS_SET uc-bas-q5
+      POTENTIAL GTH-PBE-q5
+    &END KIND
+    &KIND O
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-PBE-q6
+    &END KIND
+    &KIND F
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-PBE-q7
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refNiCO4q18
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+&END GLOBAL

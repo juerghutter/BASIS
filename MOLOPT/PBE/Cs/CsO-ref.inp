@@ -2,6 +2,7 @@
   METHOD Quickstep
   &DFT
     LSD
+    MULTIPLICITY 2
     BASIS_SET_FILE_NAME ../PBE_UCBASIS
     POTENTIAL_FILE_NAME ../POTENTIAL
     &MGRID
@@ -12,16 +13,17 @@
       EPS_DEFAULT 1.0E-14
     &END QS
     &SCF
-      EPS_SCF 1.0E-7
-      MAX_SCF 10
-      SCF_GUESS ATOMIC
+      EPS_SCF 1.0E-6
+      MAX_SCF 40
+      SCF_GUESS RESTART
       &OT
-         MINIMIZER DIIS
+         MINIMIZER CG
+         LINESEARCH 2PNT
          PRECONDITIONER FULL_ALL
       &END OT
       &OUTER_SCF
-        EPS_SCF 1.0E-7
-        MAX_SCF 10
+        EPS_SCF 1.0E-6
+        MAX_SCF 5
       &END 
     &END SCF
     &XC
@@ -31,15 +33,15 @@
   &END DFT
   &SUBSYS
     &CELL
-      ABC 12.0 12.0 12.0
+      ABC 10.0 10.0 10.0
     &END CELL
     &COORD
 O       9.00000000       9.00000000       7.61495755        
 Cs       9.00000000       9.00000000      10.38504245      
     &END COORD
     &KIND Cs
-      BASIS_SET uc-bas-q1
-      POTENTIAL GTH-PBE-q1
+      BASIS_SET uc-bas-q9
+      POTENTIAL GTH-PBE-q9
     &END KIND
 ################################
     &KIND H
@@ -57,7 +59,7 @@ Cs       9.00000000       9.00000000      10.38504245
   &END SUBSYS
 &END FORCE_EVAL
 &GLOBAL
-  PROJECT refCsOq1
+  PROJECT refCsOq9
   RUN_TYPE ENERGY
   PRINT_LEVEL LOW
 &END GLOBAL
