@@ -1,0 +1,103 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    BASIS_SET_FILE_NAME ../SCAN_UCBASIS
+    POTENTIAL_FILE_NAME ../POTENTIAL
+    &MGRID
+      CUTOFF 100
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      EPS_DEFAULT 1.0E-12
+    &END QS
+    &SCF
+      EPS_SCF 1.0E-7
+      MAX_SCF 10
+      SCF_GUESS RESTART
+      &OT
+         MINIMIZER DIIS
+         PRECONDITIONER FULL_ALL
+      &END OT
+      &OUTER_SCF
+        EPS_SCF 1.0E-7
+        MAX_SCF 10
+      &END 
+    &END SCF
+    &XC
+       &XC_FUNCTIONAL
+         &LIBXC
+          FUNCTIONAL MGGA_X_SCAN
+         &END LIBXC
+         &LIBXC
+          FUNCTIONAL MGGA_C_SCAN
+         &END LIBXC
+       &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 10.0 10.0 10.0
+    &END CELL
+    &COORD
+Nb       7.98540752       8.42131899       7.60613417       
+O       9.38776347       7.97096349       6.67253035      
+O       6.61223653       7.88669254       6.67533439     
+F       8.01148752       7.57868101       9.32746965       
+    &END COORD
+    &KIND Nb
+      BASIS_SET uc-bas-q13
+      POTENTIAL GTH-SCAN-q13
+    &END KIND
+################################
+    &KIND Al
+      BASIS_SET uc-bas-q3
+      POTENTIAL GTH-SCAN-q3
+    &END KIND
+    &KIND Si
+      BASIS_SET uc-bas-q4
+      POTENTIAL GTH-SCAN-q4
+    &END KIND
+    &KIND P 
+      BASIS_SET uc-bas-q5
+      POTENTIAL GTH-SCAN-q5
+    &END KIND
+    &KIND S 
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-SCAN-q6
+    &END KIND
+    &KIND Cl
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-SCAN-q7
+    &END KIND
+################################
+    &KIND H
+      BASIS_SET uc-bas-q1
+      POTENTIAL GTH-SCAN-q1
+    &END KIND
+    &KIND B
+      BASIS_SET uc-bas-q3
+      POTENTIAL GTH-SCAN-q3
+    &END KIND
+    &KIND C
+      BASIS_SET uc-bas-q4
+      POTENTIAL GTH-SCAN-q4
+    &END KIND
+    &KIND N
+      BASIS_SET uc-bas-q5
+      POTENTIAL GTH-SCAN-q5
+    &END KIND
+    &KIND O
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-SCAN-q6
+    &END KIND
+    &KIND F
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-SCAN-q7
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refNbO2Fq13
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+&END GLOBAL
