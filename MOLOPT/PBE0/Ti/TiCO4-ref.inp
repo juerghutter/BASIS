@@ -1,0 +1,131 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    BASIS_SET_FILE_NAME ../PBE0_UCSEGBASIS
+    POTENTIAL_FILE_NAME ../POTENTIAL
+    &MGRID
+      CUTOFF  1600
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      EPS_DEFAULT 1.0E-12
+    &END QS
+    &SCF
+      EPS_SCF 1.0E-6
+      MAX_SCF 20
+##      SCF_GUESS ATOMIC
+      SCF_GUESS RESTART
+      &OT
+         MINIMIZER CG
+         LINESEARCH 2PNT
+         PRECONDITIONER FULL_ALL
+      &END OT
+      &OUTER_SCF
+        EPS_SCF 1.0E-6
+        MAX_SCF 5
+      &END 
+    &END SCF
+#    &XC
+#      &XC_FUNCTIONAL PBE
+#      &END XC_FUNCTIONAL
+#    &END XC
+     &XC
+      &XC_FUNCTIONAL
+        &PBE
+          SCALE_X 0.75
+          SCALE_C 1.0
+        &END
+      &END XC_FUNCTIONAL
+      &HF
+        &SCREENING
+          EPS_SCHWARZ 1.0E-12
+          SCREEN_ON_INITIAL_P F
+        &END
+        &MEMORY
+          MAX_MEMORY 3500
+          EPS_STORAGE_SCALING 0.1
+        &END
+        &INTERACTION_POTENTIAL
+          POTENTIAL_TYPE COULOMB
+        &END
+        FRACTION 0.25
+      &END
+    &END XC
+    &POISSON
+        PERIODIC NONE
+        POISSON_SOLVER MT
+    &END
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 14.0 14.0 14.0
+      PERIODIC NONE
+    &END CELL
+    &COORD
+Ti       8.50000000       8.50000000       8.50000000       22
+C       9.69175793       7.30824207       9.69175793        6 
+C       7.30824207       9.69175793       9.69175793        6 
+C       7.30824207       7.30824207       7.30824207        6 
+C       9.69175793       9.69175793       7.30824207        6 
+O      10.36425999       6.63574001      10.36425999        8 
+O       6.63574001      10.36425999      10.36425999        8 
+O       6.63574001       6.63574001       6.63574001        8 
+O      10.36425999      10.36425999       6.63574001        8 
+    &END COORD
+    &KIND Ti
+      BASIS_SET uc-bas-q12
+      POTENTIAL GTH-PBE0-q12
+    &END KIND
+################################
+    &KIND Al
+      BASIS_SET uc-bas-q3
+      POTENTIAL GTH-PBE0-q3
+    &END KIND
+    &KIND Si
+      BASIS_SET uc-bas-q4
+      POTENTIAL GTH-PBE0-q4
+    &END KIND
+    &KIND P 
+      BASIS_SET uc-bas-q5
+      POTENTIAL GTH-PBE0-q5
+    &END KIND
+    &KIND S 
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-PBE0-q6
+    &END KIND
+    &KIND Cl
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-PBE0-q7
+    &END KIND
+################################
+    &KIND H
+      BASIS_SET uc-bas-q1
+      POTENTIAL GTH-PBE0-q1
+    &END KIND
+    &KIND B
+      BASIS_SET uc-bas-q3
+      POTENTIAL GTH-PBE0-q3
+    &END KIND
+    &KIND C
+      BASIS_SET uc-bas-q4
+      POTENTIAL GTH-PBE0-q4
+    &END KIND
+    &KIND N
+      BASIS_SET uc-bas-q5
+      POTENTIAL GTH-PBE0-q5
+    &END KIND
+    &KIND O
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-PBE0-q6
+    &END KIND
+    &KIND F
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-PBE0-q7
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refTiCO4q12
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+&END GLOBAL

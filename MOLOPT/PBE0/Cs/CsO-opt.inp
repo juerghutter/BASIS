@@ -1,0 +1,70 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    LSD
+    MULTIPLICITY 2
+    BASIS_SET_FILE_NAME ../PBE0_UCSEGBASIS
+    POTENTIAL_FILE_NAME ../POTENTIAL
+    &MGRID
+      CUTOFF 300
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      EPS_DEFAULT 1.0E-12
+    &END QS
+    &SCF
+      EPS_SCF 1.0E-6
+      MAX_SCF 40
+      SCF_GUESS ATOMIC 
+      &OT
+         MINIMIZER CG
+         LINESEARCH 2PNT
+         PRECONDITIONER FULL_ALL
+      &END OT
+      &OUTER_SCF
+        EPS_SCF 1.0E-6
+        MAX_SCF 5
+      &END 
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
+    &POISSON
+      PERIODIC NONE
+      POISSON_SOLVER MT
+    &END
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 12.0 12.0 12.0
+      PERIODIC NONE
+    &END CELL
+    &COORD
+O       9.00000000       9.00000000       7.61495755        
+Cs       9.00000000       9.00000000      10.38504245      
+    &END COORD
+    &KIND Cs
+      BASIS_SET uc-bas-q9
+      POTENTIAL GTH-PBE0-q9
+    &END KIND
+################################
+    &KIND H
+      BASIS_SET uc-bas-q1
+      POTENTIAL GTH-PBE0-q1
+    &END KIND
+    &KIND O
+      BASIS_SET uc-bas-q6
+      POTENTIAL GTH-PBE0-q6
+    &END KIND
+    &KIND F
+      BASIS_SET uc-bas-q7
+      POTENTIAL GTH-PBE0-q7
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refCsOq9
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+&END GLOBAL
