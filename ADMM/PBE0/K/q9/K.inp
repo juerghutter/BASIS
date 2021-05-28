@@ -4,7 +4,7 @@
 &ATOM
   ELEMENT K  
 
-  #RUN_TYPE BASIS_OPTIMIZATION
+  RUN_TYPE BASIS_OPTIMIZATION
 
   ELECTRON_CONFIGURATION  CORE 3s2 3p6 4s1
   CORE [Ne]
@@ -20,24 +20,15 @@
   &OPTIMIZATION
     EPS_SCF 1.e-7
   &END 
-  &PRINT
-     &RESPONSE_BASIS
-        DERIVATIVES   1
-        FILENAME  =MINBAS
-     &END
-  &END
 
   &PP_BASIS
-  BASIS_TYPE GAUSSIAN
-  NUM_GTO    5 3
-  S_EXPONENTS           5.44728334 \
-                        3.74034811 \
-                        0.66758424 \
-                        0.25023509 \
-                        0.03772538
-  P_EXPONENTS           0.90412290 \
-                        0.32643372 \
-                        0.11893132
+#    BASIS_TYPE GAUSSIAN
+#    NUM_GTO    4 3
+#    S_EXPONENTS          16.00  1.83  0.60  0.06
+#    P_EXPONENTS          13.00  2.50  0.75
+    NUM_GTO    5 3
+    S_EXPONENTS          16.00  8.00  1.83  0.60  0.06
+    P_EXPONENTS          13.00  2.50  0.75
   &END PP_BASIS
 
   &POTENTIAL
@@ -52,12 +43,13 @@
                                                     2.91266499109653
     &END 
     CONFINEMENT_TYPE  BARRIER
-    CONFINEMENT 200. 4.0 12.0 
+    CONFINEMENT 200. 4.0 10.0 
   &END POTENTIAL
 
   &POWELL
      ACCURACY   1.e-14
-     STEP_SIZE  0.5
+     STEP_SIZE  0.1
      MAX_FUN    10000
   &END
+
 &END ATOM
