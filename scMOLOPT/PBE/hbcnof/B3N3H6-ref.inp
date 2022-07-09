@@ -1,0 +1,81 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    BASIS_SET_FILE_NAME ../def2QZVPP
+    POTENTIAL_FILE_NAME ../POTENTIAL
+    &MGRID
+      CUTOFF 500
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      METHOD GAPW
+      EPS_DEFAULT 1.0E-14
+    &END QS
+    &SCF
+      EPS_SCF 1.0E-7
+      MAX_SCF 10
+      SCF_GUESS ATOMIC
+      &OT
+         MINIMIZER DIIS
+         PRECONDITIONER FULL_ALL
+      &END OT
+      &OUTER_SCF
+        EPS_SCF 1.0E-7
+        MAX_SCF 10
+      &END 
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 12.0 12.0 12.0
+    &END CELL
+    &COORD
+B      10.33910858       8.99999810       9.00000000        5
+N       9.58876259      10.22521158       9.00000000        7
+B       8.15219973      10.26228507       9.00000000        5
+N       7.46600290       9.00000093       9.00000000        7
+B       8.15219196       7.73771395       9.00000000        5
+N       9.58875563       7.77478781       9.00000000        7
+H      11.55514319       8.99999555       9.00000000        1
+H      10.09929071      11.10945511       9.00000000        1
+H       7.54445978      11.31573408       9.00000000        1
+H       6.44485681       9.00000202       9.00000000        1
+H       7.54445332       6.68426592       9.00000000        1
+H      10.09928808       6.89054764       9.00000000        1
+    &END COORD
+    &KIND H
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND B
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND C
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND N
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND O
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND F
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refB3N3H6
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+  PREFERRED_DIAG_LIBRARY SL
+&END GLOBAL

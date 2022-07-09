@@ -1,0 +1,79 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    BASIS_SET_FILE_NAME ../def2QZVPP
+    POTENTIAL_FILE_NAME ../POTENTIAL
+    &MGRID
+      CUTOFF 800
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      METHOD GAPW
+      EPS_DEFAULT 1.0E-14
+    &END QS
+    &SCF
+      EPS_SCF 2.0E-6
+      MAX_SCF 20
+      ##SCF_GUESS ATOMIC
+      SCF_GUESS RESTART
+      &OT
+         MINIMIZER DIIS
+         ##MINIMIZER CG
+         LINESEARCH 2PNT
+         PRECONDITIONER FULL_ALL
+         STEPSIZE 0.1
+      &END OT
+      &OUTER_SCF
+        EPS_SCF 2.0E-6
+        MAX_SCF 2
+      &END
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 18.0 18.0 18.0
+    &END CELL
+    &COORD
+Ti       7.50000000       7.50000000       6.69212363       22
+O       7.50000000       7.50000000       8.30787637        8 
+    &END COORD
+    &KIND Ti
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND S
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND Cl
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND H
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND C
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND O
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND F
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refTiO
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+  PREFERRED_DIAG_LIBRARY SL
+&END GLOBAL

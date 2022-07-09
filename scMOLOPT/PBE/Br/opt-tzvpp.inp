@@ -1,0 +1,83 @@
+&GLOBAL
+  PROJECT molopt
+  PROGRAM_NAME OPTIMIZE_BASIS
+&END GLOBAL
+&OPTIMIZE_BASIS
+
+   ! BASIS_TEMPLATE_FILE contains a basis set which is used as a 
+   ! starting point for optimization
+   BASIS_TEMPLATE_FILE ./BASIS_INPUT
+
+   ! BASIS_WORK_FILE contains the basis set generated with the information below
+   BASIS_WORK_FILE WORK_BASIS_STRUCTURE
+
+   ! BASIS_OUTPUT_FILE contains the result basis and intermediate basis set. 
+   BASIS_OUTPUT_FILE molopt_tzvpp
+
+   ! specify basis set combinations being fitted together
+   BASIS_COMBINATIONS 0 0 0 0 0 0 
+
+   USE_CONDITION_NUMBER 
+
+   ! specify the weights on the CN for all combinations
+   CONDITION_WEIGHT 0.01 ! 0
+
+   ! specify the weights on the residuums for all combinations
+   RESIDUUM_WEIGHT 10  ! 0
+
+   WRITE_FREQUENCY 500
+
+   &OPTIMIZATION
+      MAX_FUN 100000
+      ACCURACY  1.e-08
+      STEP_SIZE 0.03
+   &END
+
+   &TRAINING_FILES
+     INPUT_FILE_NAME Br2-ref.inp
+   &END
+   &TRAINING_FILES
+     INPUT_FILE_NAME BrO4m-ref.inp
+   &END
+   &TRAINING_FILES
+     INPUT_FILE_NAME HCBr3-ref.inp
+   &END
+   &TRAINING_FILES
+     INPUT_FILE_NAME BrCl-ref.inp
+   &END
+   &TRAINING_FILES
+     INPUT_FILE_NAME HBr-ref.inp
+   &END
+   &TRAINING_FILES
+     INPUT_FILE_NAME KBr-ref.inp
+   &END
+
+#########################################################
+   &FIT_KIND Br
+     BASIS_SET TZVPP-MOLOPT-PBE-AE
+     INITIAL_DEGREES_OF_FREEDOM ALL
+   &END 
+#########################################################
+   &FIT_KIND K
+     BASIS_SET TZVPP-MOLOPT-PBE-AE
+     INITIAL_DEGREES_OF_FREEDOM ALL
+   &END 
+#########################################################
+   &FIT_KIND H
+     BASIS_SET TZVPP-MOLOPT-PBE-AE
+     INITIAL_DEGREES_OF_FREEDOM NONE
+   &END   
+   &FIT_KIND C
+     BASIS_SET TZVPP-MOLOPT-PBE-AE
+     INITIAL_DEGREES_OF_FREEDOM NONE
+   &END
+   &FIT_KIND O
+     BASIS_SET TZVPP-MOLOPT-PBE-AE
+     INITIAL_DEGREES_OF_FREEDOM NONE
+   &END
+   &FIT_KIND Cl
+     BASIS_SET TZVPP-MOLOPT-PBE-AE
+     INITIAL_DEGREES_OF_FREEDOM NONE
+   &END 
+ &END 
+&END

@@ -1,0 +1,69 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    LSD
+    CHARGE -1
+    BASIS_SET_FILE_NAME ../def2QZVPP
+    POTENTIAL_FILE_NAME ../POTENTIAL
+    &MGRID
+      CUTOFF 600
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      METHOD GAPW
+      EPS_DEFAULT 1.0E-14
+    &END QS
+    &SCF
+      EPS_SCF 1.0E-7
+      MAX_SCF 20
+      SCF_GUESS ATOMIC
+      &OT
+         MINIMIZER DIIS
+         PRECONDITIONER FULL_ALL
+         STEPSIZE 0.1
+      &END OT
+      &OUTER_SCF
+        EPS_SCF 1.0E-7
+        MAX_SCF 5
+      &END
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 12.0 12.0 12.0
+    &END CELL
+    &COORD
+Mn       7.50000000       7.50000000       7.50000000       25       3.00000000
+O       8.43102670       6.56897330       8.43102670        8      -1.00000000
+O       6.56897330       8.43102670       8.43102670        8      -1.00000000
+O       6.56897330       6.56897330       6.56897330        8      -1.00000000
+O       8.43102670       8.43102670       6.56897330        8      -1.00000000
+    &END COORD
+    &KIND Mn
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+      MAGNETIZATION 2
+    &END KIND
+    &KIND S
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND O
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND F
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refMnO4m
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+&END GLOBAL

@@ -1,0 +1,105 @@
+&GLOBAL
+  PROJECT molopt
+  PROGRAM_NAME OPTIMIZE_BASIS
+&END GLOBAL
+&OPTIMIZE_BASIS
+
+   ! BASIS_TEMPLATE_FILE contains a basis set which is used as a 
+   ! starting point for optimization
+   BASIS_TEMPLATE_FILE ./BASIS_INPUT
+
+   ! BASIS_WORK_FILE contains the basis set generated with the information below
+   BASIS_WORK_FILE WORK_BASIS_STRUCTURE
+
+   ! BASIS_OUTPUT_FILE contains the result basis and intermediate basis set. 
+   BASIS_OUTPUT_FILE molopt_all_q11
+
+   ! specify basis set combinations being fitted together
+   BASIS_COMBINATIONS 0 0 0
+   BASIS_COMBINATIONS 1 1 1
+   BASIS_COMBINATIONS 2 2 2
+
+   USE_CONDITION_NUMBER 
+
+   ! specify the weights on the CN for all combinations
+   CONDITION_WEIGHT 0.01 ! 0
+   CONDITION_WEIGHT 0.01 ! 1
+   CONDITION_WEIGHT 0.01 ! 2
+
+   ! specify the weights on the residuums for all combinations
+   RESIDUUM_WEIGHT 10  ! 0
+   RESIDUUM_WEIGHT 10  ! 1
+   RESIDUUM_WEIGHT 10  ! 2
+
+   WRITE_FREQUENCY 100
+
+   &OPTIMIZATION
+      MAX_FUN 100000
+      ACCURACY 1.e-10
+   &END
+############################################################
+   &TRAINING_FILES
+     INPUT_FILE_NAME YF3-opt.inp
+   &END
+   &TRAINING_FILES
+     INPUT_FILE_NAME YF-opt.inp
+   &END
+   &TRAINING_FILES
+     INPUT_FILE_NAME YO-opt.inp
+   &END
+############################################################
+   &FIT_KIND Y
+     BASIS_SET TZV2P-MOLOPT-PBE-GTH-q11
+     INITIAL_DEGREES_OF_FREEDOM COEFFICIENTS
+     &DERIVED_BASIS_SETS
+        BASIS_SET_NAME TZVP-MOLOPT-PBE-GTH-q11
+        REFERENCE_SET 0
+        REMOVE_CONTRACTION 1 3 2
+     &END
+     &DERIVED_BASIS_SETS
+        BASIS_SET_NAME DZVP-MOLOPT-PBE-GTH-q11
+        REFERENCE_SET 0
+        REMOVE_CONTRACTION 1 0 4
+        REMOVE_CONTRACTION 1 1 3
+        REMOVE_CONTRACTION 1 2 3
+        REMOVE_CONTRACTION 1 3 2
+     &END
+  &END
+############################################################
+  &FIT_KIND O 
+     BASIS_SET TZV2P-MOLOPT-PBE-GTH-q6
+     INITIAL_DEGREES_OF_FREEDOM NONE
+     &DERIVED_BASIS_SETS
+        BASIS_SET_NAME TZVP-MOLOPT-PBE-GTH-q6
+        REFERENCE_SET 0
+        REMOVE_CONTRACTION 1 3 1
+        REMOVE_CONTRACTION 1 2 2
+     &END
+     &DERIVED_BASIS_SETS
+        BASIS_SET_NAME DZVP-MOLOPT-PBE-GTH-q6
+        REFERENCE_SET 0
+        REMOVE_CONTRACTION 1 3 1
+        REMOVE_CONTRACTION 1 2 2
+        REMOVE_CONTRACTION 1 1 3
+        REMOVE_CONTRACTION 1 0 3
+     &END
+   &END
+   &FIT_KIND F
+     BASIS_SET TZV2P-MOLOPT-PBE-GTH-q7
+     INITIAL_DEGREES_OF_FREEDOM NONE
+     &DERIVED_BASIS_SETS
+        BASIS_SET_NAME TZVP-MOLOPT-PBE-GTH-q7
+        REFERENCE_SET 0
+        REMOVE_CONTRACTION 1 3 1
+        REMOVE_CONTRACTION 1 2 2
+     &END
+     &DERIVED_BASIS_SETS
+        BASIS_SET_NAME DZVP-MOLOPT-PBE-GTH-q7
+        REFERENCE_SET 0
+        REMOVE_CONTRACTION 1 3 1
+        REMOVE_CONTRACTION 1 2 2
+        REMOVE_CONTRACTION 1 1 3
+        REMOVE_CONTRACTION 1 0 3
+     &END
+   &END
+&END

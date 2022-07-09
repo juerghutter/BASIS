@@ -1,0 +1,66 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    BASIS_SET_FILE_NAME ../def2QZVPP
+    POTENTIAL_FILE_NAME ../POTENTIAL
+    &MGRID
+      CUTOFF 600
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      METHOD GAPW
+      EPS_DEFAULT 1.0E-14
+    &END QS
+    &SCF
+      EPS_SCF 1.0E-7
+      MAX_SCF 20
+      SCF_GUESS ATOMIC
+      &OT
+         MINIMIZER DIIS
+         PRECONDITIONER FULL_ALL
+         STEPSIZE 0.1
+      &END OT
+      &OUTER_SCF
+        EPS_SCF 1.0E-7
+        MAX_SCF 5
+      &END 
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 12.0 12.0 12.0
+    &END CELL
+    &COORD
+Pd       8.50000891       8.50000884       8.49998999     
+C       9.65546924       9.65546949       9.65546429     
+C       7.34454457       7.34454711       9.65545542    
+C       9.65547039       7.34453561       7.34452901   
+C       7.34453521       9.65547023       7.34452942  
+O      10.32071446      10.32071478      10.32072264 
+O       6.67929361       6.67930820      10.32072435
+O      10.32072377       6.67927615       6.67927565      
+O       6.67927623      10.32072385       6.67927590     
+    &END COORD
+    &KIND Pd
+      BASIS_SET def2-QZVPP
+      POTENTIAL GTH-PBE-q18
+    &END KIND
+    &KIND C
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND O
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refPdCO4
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+&END GLOBAL

@@ -1,0 +1,68 @@
+&FORCE_EVAL
+  METHOD Quickstep
+  &DFT
+    BASIS_SET_FILE_NAME ../def2QZVPP
+    POTENTIAL_FILE_NAME ../POTENTIAL
+    &MGRID
+      CUTOFF 600
+      REL_CUTOFF  60
+    &END MGRID
+    &QS
+      METHOD GAPW
+      EPS_DEFAULT 1.0E-14
+    &END QS
+    &SCF
+      EPS_SCF 5.0E-7
+      MAX_SCF 18
+      SCF_GUESS ATOMIC
+      &OT
+         MINIMIZER DIIS
+         PRECONDITIONER FULL_ALL
+         STEPSIZE 0.1
+      &END OT
+      &OUTER_SCF
+        EPS_SCF 5.0E-7
+        MAX_SCF 5
+      &END
+    &END SCF
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
+  &END DFT
+  &SUBSYS
+    &CELL
+      ABC 12.0 12.0 12.0
+    &END CELL
+    &COORD
+V       8.28834144       8.03692899       8.19278711       23
+H       8.83231652       8.10347687       6.63169078        1
+H       8.90444667       7.02652695       9.28471280        1
+H       8.90854359       8.94597409       9.36830922        1
+H       7.09810429       8.97347305       8.73749136        1
+H       7.09145641       7.06448557       8.65405171        1
+    &END COORD
+    &KIND V 
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND H
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND O
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+    &KIND F
+      BASIS_SET def2-QZVPP
+      POTENTIAL ALL
+    &END KIND
+  &END SUBSYS
+&END FORCE_EVAL
+&GLOBAL
+  PROJECT refVH5
+  RUN_TYPE ENERGY
+  PRINT_LEVEL LOW
+  PREFERRED_DIAG_LIBRARY SL
+&END GLOBAL
