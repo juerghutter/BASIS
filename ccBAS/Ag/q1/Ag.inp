@@ -1,0 +1,53 @@
+&GLOBAL
+  PROGRAM_NAME ATOM
+&END GLOBAL
+&ATOM
+  ELEMENT Ag  
+
+  ELECTRON_CONFIGURATION  CORE 5s1
+  CORE [Kr] 4d10
+  MAX_ANGULAR_MOMENTUM 2
+
+  &METHOD
+     METHOD_TYPE  KOHN-SHAM
+     &XC
+       &XC_FUNCTIONAL PBE0
+       &END XC_FUNCTIONAL
+     &END XC
+  &END METHOD
+
+  &OPTIMIZATION
+    EPS_SCF 1.e-7
+  &END 
+  &PRINT
+     &GEOMETRICAL_RESPONSE_BASIS
+       FILENAME          =VALBAS
+       DERIVATIVES             1
+       NAME_BODY           ccGRB
+       NUM_GTO_CORE            6
+       NUM_GTO_POLARIZATION    1
+       NUM_GTO_EXTENDED        1
+       GEO_START_VALUE      0.02
+       GEOMETRICAL_FACTOR   2.80
+       CONFINEMENT         10.00
+     &END
+  &END
+
+  &POTENTIAL
+    PSEUDO_TYPE GTH
+    &GTH_POTENTIAL
+    1    0    0    0                                                   
+    0.50884772933645       1   -0.53126023886345   
+       3                                            
+    0.86917506999526       3    0.74801841513039    0.12558074366849   -0.06394674435109
+                                                   -0.47181808189646    0.24639425835488
+                                                                       -0.34942658938819
+    0.93516610403460       2    0.51381632168808    0.01594187876012
+                                                   -0.35372585465702
+    1.16632800319316       1   -0.06895972410336   
+    &END 
+    CONFINEMENT_TYPE  BARRIER
+    CONFINEMENT 200. 4.0 12.0 
+  &END POTENTIAL
+
+&END ATOM
