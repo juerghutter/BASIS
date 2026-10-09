@@ -1,8 +1,8 @@
 &FORCE_EVAL
   METHOD Quickstep
   &DFT
-    BASIS_SET_FILE_NAME ../PBE0_UCSEGBASIS
-    POTENTIAL_FILE_NAME ../POTENTIAL
+    BASIS_SET_FILE_NAME ../../PBE0_UCSEGBASIS
+    POTENTIAL_FILE_NAME ../../POTENTIAL
     &MGRID
       CUTOFF 300
       REL_CUTOFF  60
@@ -13,15 +13,14 @@
     &SCF
       EPS_SCF 1.0E-7
       MAX_SCF 10
-      SCF_GUESS ATOMIC 
+      SCF_GUESS RESTART
       &OT
          MINIMIZER DIIS
-         LINESEARCH 2PNT
          PRECONDITIONER FULL_ALL
       &END OT
       &OUTER_SCF
         EPS_SCF 1.0E-7
-        MAX_SCF 1
+        MAX_SCF 10
       &END 
     &END SCF
     &XC
@@ -29,8 +28,8 @@
       &END XC_FUNCTIONAL
     &END XC
     &POISSON
-        PERIODIC NONE
-        POISSON_SOLVER MT
+      PERIODIC NONE
+      POISSON_SOLVER MT
     &END
   &END DFT
   &SUBSYS
@@ -39,12 +38,12 @@
       PERIODIC NONE
     &END CELL
     &COORD
-Cu       7.50000000       7.50000000       6.77012365       29
-H       7.50000000       7.50000000       8.22987635        1 
+Cu       7.50000000       7.50000000       6.62856867       29
+F       7.50000000       7.50000000       8.37143133        9 
     &END COORD
     &KIND Cu
-      BASIS_SET uc-bas-q11
-      POTENTIAL GTH-PBE0-q11
+      BASIS_SET uc-bas-q19
+      POTENTIAL GTH-PBE0-q19
     &END KIND
 ################################
     &KIND Al
@@ -95,7 +94,7 @@ H       7.50000000       7.50000000       8.22987635        1
   &END SUBSYS
 &END FORCE_EVAL
 &GLOBAL
-  PROJECT refCuHq11
+  PROJECT refCuFq19
   RUN_TYPE ENERGY
   PRINT_LEVEL LOW
 &END GLOBAL
